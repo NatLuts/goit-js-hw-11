@@ -10,10 +10,35 @@
   />
     <title>Document</title>
     <link rel="stylesheet" href="./css/styles.css" />
-
   </head>
-  <body>
 
+  <body>
+    <header>
+      <div class="container">
+        <section class="gallery-section">
+          <div class="container">
+
+            <form class="search-form js-search-form">
+              <input
+                type="text"
+                name="user-search-query"
+                class="search-input"
+              />
+              <button type="submit" class="search-btn">search</button>
+            </form>
+            <ul class="gallery js-gallery list"></ul>
+
+            <button type="button" class="load-more js-load-more is-hidden">
+              Load more
+            </button>
+
+     <div class="loader"></div>
+
+            
+          </div>
+        </section>
+      </div>
+    </header>
 <script type="module" src="./main.js"></script>
   </body>
 </html>

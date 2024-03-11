@@ -1,45 +1,19 @@
-// Описаний у документації
-import iziToast from 'izitoast';
-// Додатковий імпорт стилів
-import 'izitoast/dist/css/iziToast.min.css';
+const API_KEY = '42817939-fb8caefadf90676475c3fc719';
+const BASE_URL = 'https://pixabay.com/api/';
 
-const form = document.querySelector('.form');
+export function getPhotos(q) {
+  const params = new URLSearchParams({
+    key: API_KEY,
+    q: "cat",
+    image_type: 'photo',
+    orientation: 'horizontal',
+    safesearch: true,
+  });
 
-form.addEventListener('submit', onFormSubmit);
-
-function onFormSubmit(e) {
-  e.preventDefault();
-  const delay = +e.currentTarget.elements.delay.value;
-  const stateInput = e.currentTarget.elements.state.value;
-
-  createPromiseWithDelay(stateInput, delay)
-    .then(delay => {
-      iziToast.success({
-        message: `✅ Fulfilled promise in ${delay}ms`,
-        backgroundColor: '#59A10D',
-        messageColor: '#fff',
-        position: 'topRight',
-      });
-    })
-    .catch(delay => {
-      iziToast.error({
-        message: `❌ Rejected promise in ${delay}ms`,
-        backgroundColor: '#EF4040',
-        messageColor: '#fff',
-        position: 'topRight',
-      });
-    });
-  e.currentTarget.reset();
-}
-
-function createPromiseWithDelay(btn, delay) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (btn === 'fulfilled') {
-        resolve(delay);
-      } else {
-        reject(delay);
-      }
-    }, delay);
+  return fetch(`${BASE_URL}/?${params}`).then(res => {
+    if (!res.ok) {
+      throw new Error(res.status);
+    }
+    return res.json();
   });
 }
