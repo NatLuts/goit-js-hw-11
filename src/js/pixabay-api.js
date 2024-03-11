@@ -4,7 +4,7 @@ const BASE_URL = 'https://pixabay.com/api/';
 export function getPhotos(q) {
   const params = new URLSearchParams({
     key: API_KEY,
-    q: "cat",
+    q,
     image_type: 'photo',
     orientation: 'horizontal',
     safesearch: true,

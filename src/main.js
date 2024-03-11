@@ -17,8 +17,9 @@ form.addEventListener("submit", onFormSubmit )
 function onFormSubmit(e) {
     e.preventDefault();
     gallery.innerHTML = "";
+    showLoader();
 
-    const searchQuery = e.currentTarget.elements['user-search-query'].value.trim();
+searchQuery = e.currentTarget.elements['user-search-query'].value.trim();
 
     if (!searchQuery){
         showEmptyInputToast, hideLoader();
@@ -29,7 +30,9 @@ function onFormSubmit(e) {
         if (res.hits.length=== 0) return showErrorToast()
 
         gallery.innerHTML = createMarkup(res.hits);
+        refreshLightbox();
     }).catch(console.log).finally(() => hideLoader());
+
     e.currentTarget.reset();
 
 }
@@ -39,7 +42,7 @@ const lightbox = new SimpleLightbox('.gallery a', {
     captionsData: 'alt',
     captionDelay: 250,
   });
-  refreshLightbox();
+ 
 
   function refreshLightbox() {
     lightbox.refresh();
