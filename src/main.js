@@ -22,9 +22,11 @@ function onFormSubmit(e) {
 searchQuery = e.currentTarget.elements['user-search-query'].value.trim();
 
     if (!searchQuery){
-        showEmptyInputToast(), hideLoader();
-        return;
-    }
+      showEmptyInputToast();
+      hideLoader();
+      return;
+  }
+  
 
     getPhotos(searchQuery).then(res => {
         if (res.hits.length=== 0) return showErrorToast()
